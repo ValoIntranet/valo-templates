@@ -3,10 +3,11 @@ var gulp = require("gulp"),
   fs = require("fs"),
   concat = require("gulp-concat"),
   path = require("path"),
-  merge = require("merge-stream");
-
-var ts = require("gulp-typescript");
+  merge = require("merge-stream"),
+    ts = require("gulp-typescript")
+    sass = require('gulp-sass');
 var tsProject = ts.createProject("tsconfig.json");
+sass.compiler = require('node-sass');
 
 const isDirectory = source => fs.lstatSync(source).isDirectory();
 const getDirectories = source =>
@@ -32,13 +33,13 @@ gulp.task("merge", () => {
         "models/part1.html",
         `${x}/metadata.json`,
         "models/part2.html",
-        `${x}/template.css`,
+        `tmp/templates/${componentName}/template.css`,
         "models/part3.html",
         `${tmpPathJs}/template.js`,
         "models/part4.html",
         `${x}/template.html`,
         "models/part5.html",
-        `${x}/placeholder.css`,
+        `tmp/templates/${componentName}/placeholder.css`,
         "models/part6.html",
         `${tmpPathJs}/placeholder.js`,
         "models/part7.html",
@@ -61,3 +62,8 @@ gulp.task("transpile", () => {
     .pipe(tsProject())
     .js.pipe(gulp.dest(`tmp`));
 });
+gulp.task("sass", () => {
+    return gulp.src('./src/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('tmp'));
+})
