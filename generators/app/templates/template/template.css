@@ -1,0 +1,7 @@
+div[class^="mainContent"] {
+  background-color: #efefef;
+}
+
+.hidden {
+  display: none;
+}

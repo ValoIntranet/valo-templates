@@ -1,0 +1,19 @@
+{
+  "name": "generator-valo",
+  "version": "1.0.0",
+  "description": "Gets you started with valo templates",
+  "main": "generators/app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yeoman",
+    "valo",
+    "templates"
+  ],
+  "author": "Vincent Biret",
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^3.2.0"
+  }
+}
