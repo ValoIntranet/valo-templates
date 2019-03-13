@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../metadataschema.json",
   "fields": [
     "Path",
     "LastModifiedTime",

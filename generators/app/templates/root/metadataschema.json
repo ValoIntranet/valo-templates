@@ -1,0 +1,121 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": ["fields", "query", "sorting", "resources"],
+  "properties": {
+    "fields": {
+      "$id": "#/properties/fields",
+      "type": "array",
+      "title": "SharePoint Search Fields you want to include",
+      "items": {
+        "$id": "#/properties/fields/items",
+        "type": "string",
+        "title": "The Items Schema",
+        "default": "",
+        "examples": [
+          "Path",
+          "LastModifiedTime",
+          "Title",
+          "EditorOWSUSER",
+          "Author",
+          "BannerImageUrlOWSURLH",
+          "Description",
+          "ListID",
+          "ListItemID",
+          "SPWebUrl",
+          "ValoLocationOWSTEXT",
+          "owstaxIdValoTags"
+        ],
+        "pattern": "^(.*)$"
+      }
+    },
+    "query": {
+      "$id": "#/properties/query",
+      "type": "string",
+      "title": "KQL Search query",
+      "default": "",
+      "examples": ["PromotedState: OR PromotedState:"],
+      "pattern": "^(.*)$"
+    },
+    "sorting": {
+      "$id": "#/properties/sorting",
+      "type": "string",
+      "title": "SharePoint Search Sorting property prop:sortorder",
+      "default": "",
+      "examples": ["LastModifiedTime:descending"],
+      "pattern": "^(.*)$"
+    },
+    "resources": {
+      "$id": "#/properties/resources",
+      "type": "array",
+      "title": "The Localization Resources",
+      "items": {
+        "$id": "#/properties/resources/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": ["key", "values"],
+        "properties": {
+          "key": {
+            "$id": "#/properties/resources/items/properties/key",
+            "type": "string",
+            "title": "Resource Key you'll use in the template",
+            "default": "",
+            "examples": ["title"],
+            "pattern": "^(.*)$"
+          },
+          "values": {
+            "$id": "#/properties/resources/items/properties/values",
+            "type": "object",
+            "title": "Resources for each language",
+            "required": ["default"],
+            "properties": {
+              "default": {
+                "$id": "#/properties/resources/items/properties/values/properties/default",
+                "type": "string",
+                "title": "Default resource when language translation is absent",
+                "default": "",
+                "examples": ["Title:"],
+                "pattern": "^(.*)$"
+              },
+              "nl-nl": {
+                "$id": "#/properties/resources/items/properties/values/properties/nl-nl",
+                "type": "string",
+                "title": "The Nl-nl translation",
+                "default": "",
+                "examples": ["Titel:"],
+                "pattern": "^(.*)$"
+              },
+              "fr-fr": {
+                "$id": "#/properties/resources/items/properties/values/properties/nl-nl",
+                "type": "string",
+                "title": "The fr-fr translation",
+                "default": "",
+                "examples": ["Titel:"],
+                "pattern": "^(.*)$"
+              },
+              "en-us": {
+                "$id": "#/properties/resources/items/properties/values/properties/nl-nl",
+                "type": "string",
+                "title": "The en-us translation",
+                "default": "",
+                "examples": ["Titel:"],
+                "pattern": "^(.*)$"
+              },
+              "es-es": {
+                "$id": "#/properties/resources/items/properties/values/properties/nl-nl",
+                "type": "string",
+                "title": "The es-es translation",
+                "default": "",
+                "examples": ["Titel:"],
+                "pattern": "^(.*)$"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
