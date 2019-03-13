@@ -4,8 +4,10 @@ var gulp = require("gulp"),
   concat = require("gulp-concat"),
   path = require("path"),
   merge = require("merge-stream"),
-  ts = require("gulp-typescript");
-sass = require("gulp-sass");
+  ts = require("gulp-typescript"),
+  watch = require("gulp-watch"),
+  sass = require("gulp-sass");
+var spsync = require("gulp-spsync-creds").sync;
 var tsProject = ts.createProject("tsconfig.json");
 sass.compiler = require("node-sass");
 
@@ -44,7 +46,7 @@ gulp.task("merge", () => {
         "models/part8.html"
       ])
       .pipe(concat(`${componentName}.html`))
-      .pipe(gulp.dest("dist"));
+      .pipe(gulp.dest("dist/TemplatesGallery"));
   });
   return merge(tasks);
 });
@@ -64,5 +66,19 @@ gulp.task("sass", () => {
     .src("./src/**/*.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(gulp.dest("tmp"));
+});
+gulp.task("sync", () => {
+  gulp
+    .src("dist/**/*")
+    .pipe(watch("dist/**/*.*"))
+    .pipe(
+      spsync({
+        username: "seb@valo365.com",
+        password: "Pass@word!",
+        site: "https://valo365.sharepoint.com/sites/valotemplates/",
+        verbose: "true",
+        watch: true
+      })
+    );
 });
 gulp.task("build", gulp.series("transpile", "sass", "merge"));
