@@ -4,10 +4,10 @@ var gulp = require("gulp"),
   concat = require("gulp-concat"),
   path = require("path"),
   merge = require("merge-stream"),
-    ts = require("gulp-typescript")
-    sass = require('gulp-sass');
+  ts = require("gulp-typescript");
+sass = require("gulp-sass");
 var tsProject = ts.createProject("tsconfig.json");
-sass.compiler = require('node-sass');
+sass.compiler = require("node-sass");
 
 const isDirectory = source => fs.lstatSync(source).isDirectory();
 const getDirectories = source =>
@@ -20,9 +20,6 @@ getComponentNameFromDirectory = directory => {
   const componentName = directoryNameRegex.exec(directory)[1];
   return componentName;
 };
-gulp.task("build", () => {
-  return gutil.log("Gulp is running!");
-});
 gulp.task("merge", () => {
   const directories = getDirectories("src/templates");
   const tmpPathJs = directories.length === 1 ? "tmp" : `tmp/${componentName}`;
@@ -63,7 +60,9 @@ gulp.task("transpile", () => {
     .js.pipe(gulp.dest(`tmp`));
 });
 gulp.task("sass", () => {
-    return gulp.src('./src/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('tmp'));
-})
+  return gulp
+    .src("./src/**/*.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(gulp.dest("tmp"));
+});
+gulp.task("build", gulp.series("transpile", "sass", "merge"));
