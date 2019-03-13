@@ -1,4 +1,4 @@
-function ValoNewsPrev(compId) {
+function ValoNewsPrev(compId: string) {
   var firstElmFound = false;
   var elms = document.querySelectorAll("#" + compId + " .ms-sm4");
   // Check if elements were found
@@ -30,7 +30,7 @@ function ValoNewsPrev(compId) {
   }
 }
 
-function ValoNewsNext(compId) {
+function ValoNewsNext(compId: string) {
   var firstElmFound = false;
   var elms = document.querySelectorAll("#" + compId + " .ms-sm4");
   // Check if elements were found
