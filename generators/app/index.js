@@ -32,7 +32,7 @@ module.exports = class extends Generator {
   }
   installCoreDependencies() {
     this.log("installing core dependencies");
-    this.npmInstall(["typescript", "gulp", "fs"], { "save-dev": true });
+    this.npmInstall(["typescript", "gulp", "fs", "gulp-util", "merge-stream", "gulp-concat"], { "save-dev": true });
     // this.npmInstall(['jquery', 'lodash', 'loglevel', 'sp-pnp-js', 'whatwg-fetch'], { 'save': true });
   }
   end() {
