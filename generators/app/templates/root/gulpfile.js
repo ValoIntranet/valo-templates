@@ -10,6 +10,7 @@ var gulp = require("gulp"),
 var spsync = require("gulp-spsync-creds").sync;
 var tsProject = ts.createProject("tsconfig.json");
 sass.compiler = require("node-sass");
+var argv = require('yargs').argv;;
 
 const isDirectory = source => fs.lstatSync(source).isDirectory();
 const getDirectories = source =>
@@ -73,9 +74,9 @@ gulp.task("sync", () => {
     .pipe(watch("dist/**/*.*"))
     .pipe(
       spsync({
-        username: "seb@valo365.com",
-        password: "Pass@word!",
-        site: "https://valo365.sharepoint.com/sites/valotemplates/",
+        username: argv.username,
+        password: argv.password,
+        site: argv.site,
         verbose: "true",
         watch: true
       })
