@@ -1,6 +1,6 @@
 {
   "name": "@valo/generator-template",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Gets you started with valo templates",
   "main": "generators/app/index.js",
   "scripts": {
