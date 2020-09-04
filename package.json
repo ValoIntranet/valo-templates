@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Gets you started with valo templates",
   "main": "generators/app/index.js",
+  "author": "Elio Struyf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valointranet/valo-templates"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w"
@@ -12,7 +17,6 @@
     "valo",
     "templates"
   ],
-  "author": "Vincent Biret",
   "license": "MIT",
   "dependencies": {
     "yeoman-generator": "4.12.0",
