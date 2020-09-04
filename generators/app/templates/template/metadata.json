@@ -1,28 +1,3 @@
 {
-  "$schema": "../../../metadataschema.json",
-  "fields": [
-    "Path",
-    "LastModifiedTime",
-    "Title",
-    "EditorOWSUSER",
-    "Author",
-    "BannerImageUrlOWSURLH",
-    "Description",
-    "ListID",
-    "ListItemID",
-    "SPWebUrl",
-    "ValoLocationOWSTEXT",
-    "owstaxIdValoTags"
-  ],
-  "query": "PromotedState:1 OR PromotedState:2",
-  "sorting": "LastModifiedTime:descending",
-  "resources": [
-    {
-      "key": "title",
-      "values": {
-        "default": "Title:",
-        "nl-nl": "Titel:"
-      }
-    }
-  ]
+  "$schema": "../../../schema.json"
 }

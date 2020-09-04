@@ -44,3 +44,5 @@ jspm_packages
 node_modules/
 .tmp/
 dist/
+generatortest
+TODO.md

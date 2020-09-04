@@ -1,10 +1,11 @@
 {
-  "name": "generator-valo",
-  "version": "1.0.0",
+  "name": "@valo/generator-template",
+  "version": "0.0.1",
   "description": "Gets you started with valo templates",
   "main": "generators/app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "keywords": [
     "yeoman",
@@ -14,7 +15,12 @@
   "author": "Vincent Biret",
   "license": "MIT",
   "dependencies": {
-    "yeoman-generator": "^3.2.0"
+    "yeoman-generator": "4.12.0",
+    "yosay": "2.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/yeoman-generator": "4.11.2",
+    "@types/yosay": "0.0.29",
+    "typescript": "4.0.2"
+  }
 }

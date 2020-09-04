@@ -1,73 +1,96 @@
-var gulp = require("gulp"),
-  gutil = require("gulp-util"),
-  fs = require("fs"),
-  concat = require("gulp-concat"),
-  path = require("path"),
-  merge = require("merge-stream"),
-  ts = require("gulp-typescript"),
-  watch = require("gulp-watch"),
-  sass = require("gulp-sass");
-var spsync = require("gulp-spsync-creds").sync;
-var tsProject = ts.createProject("tsconfig.json");
+const gulp = require("gulp");
+const fs = require("fs");
+const concat = require("gulp-concat");
+const path = require("path");
+const merge = require("merge-stream");
+const ts = require("gulp-typescript");
+const watch = require("gulp-watch");
+const sass = require("gulp-sass");
+const spsync = require("gulp-spsync-creds").sync;
+
+const tsProject = ts.createProject("tsconfig.json");
 sass.compiler = require("node-sass");
-var argv = require('yargs').argv;;
+const argv = require('yargs').argv;
 
 const isDirectory = source => fs.lstatSync(source).isDirectory();
-const getDirectories = source =>
-  fs
-    .readdirSync(source)
-    .map(name => path.join(source, name))
-    .filter(isDirectory);
-getComponentNameFromDirectory = directory => {
+const getDirectories = source => {
+  return fs.readdirSync(source).map(name => path.join(source, name)).filter(isDirectory);
+}
+
+const getComponentNameFromDirectory = directory => {
   const directoryNameRegex = /[\/\\]+([\w\d_-]+)$/gm;
   const componentName = directoryNameRegex.exec(directory)[1];
   return componentName;
 };
+
 gulp.task("merge", () => {
   const directories = getDirectories("src/templates");
-  const tmpPathJs = directories.length === 1 ? "tmp" : `tmp/${componentName}`;
-  const tasks = directories.map(x => {
-    const componentName = getComponentNameFromDirectory(x);
-    return gulp
-      .src([
-        "models/part1.html",
-        `${x}/metadata.json`,
-        "models/part2.html",
-        `tmp/templates/${componentName}/template.css`,
-        "models/part3.html",
-        `${tmpPathJs}/template.js`,
-        "models/part4.html",
-        `${x}/template.html`,
-        "models/part5.html",
-        `tmp/templates/${componentName}/placeholder.css`,
-        "models/part6.html",
-        `${tmpPathJs}/placeholder.js`,
-        "models/part7.html",
-        `${x}/placeholder.html`,
-        "models/part8.html"
-      ])
-      .pipe(concat(`${componentName}.html`))
-      .pipe(gulp.dest("dist/TemplatesGallery"));
+  
+  const tasks = directories.map(dirPath => {
+    const componentName = getComponentNameFromDirectory(dirPath);
+    const libPath = dirPath.replace('src', 'lib');
+
+    const files = [];
+
+    // Template metadata
+    files.push("models/metadata_start.html");
+    files.push(`${dirPath}/metadata.json`);
+    files.push("models/metadata_end.html");
+
+    // Styling template
+    const tmpPath = path.join(__dirname, libPath, 'template.css');
+    if (fs.existsSync(tmpPath)) {
+      files.push("models/styling_start.html");
+      files.push(tmpPath);
+      files.push("models/styling_end.html");
+    }
+
+    // Custom helper
+    const helperPath = path.join(__dirname, libPath, 'helper.js');
+    if (fs.existsSync(helperPath)) {
+      files.push("models/handlebars_start.html");
+      files.push(helperPath);
+      files.push("models/handlebars_end.html");
+    }
+
+    // Main content template
+    files.push("models/content_start.html");
+
+    // JavaScript template
+    const jsPath = path.join(__dirname, libPath, 'template.js');
+    if (fs.existsSync(jsPath)) {
+      files.push("models/javascript_start.html");
+      files.push(jsPath);
+      files.push("models/javascript_end.html");
+    }
+
+    files.push(`${dirPath}/template.html`);
+    files.push("models/content_end.html");
+
+    // Placeholder template
+    const placeholderPath = path.join(__dirname, dirPath, 'placeholder.html');
+    if (fs.existsSync(placeholderPath)) {
+      files.push("models/placeholder_start.html");
+      files.push(placeholderPath);
+      files.push("models/placeholder_end.html");
+    }
+
+    return gulp.src([...files])
+    .pipe(concat(`${componentName}.html`))
+    .pipe(gulp.dest("dist/TemplatesGallery"));
   });
+
   return merge(tasks);
 });
+
 gulp.task("transpile", () => {
-  const directories = getDirectories("src/templates");
-  return gulp
-    .src(
-      directories
-        .map(x => `${x}/template.ts`)
-        .concat(directories.map(x => `${x}/placeholder.ts`))
-    )
-    .pipe(tsProject())
-    .js.pipe(gulp.dest(`tmp`));
+  return gulp.src("src/**/*.ts").pipe(tsProject()).js.pipe(gulp.dest(`./lib`));
 });
+
 gulp.task("sass", () => {
-  return gulp
-    .src("./src/**/*.scss")
-    .pipe(sass().on("error", sass.logError))
-    .pipe(gulp.dest("tmp"));
+  return gulp.src("src/**/*.scss").pipe(sass().on("error", sass.logError)).pipe(gulp.dest(`./lib`));
 });
+
 gulp.task("sync", () => {
   gulp
     .src("dist/**/*")
@@ -82,4 +105,5 @@ gulp.task("sync", () => {
       })
     );
 });
+
 gulp.task("build", gulp.series("transpile", "sass", "merge"));

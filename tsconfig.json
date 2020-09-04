@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "ES2017",
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "./generators/app/templates/template",
+    "./generators/app/templates/helper",
+    "./generatorstest/**/*.ts"
+  ]
+}

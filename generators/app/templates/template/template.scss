@@ -1,7 +1,8 @@
-div[class^="mainContent"] {
-  background-color: #efefef;
-}
+@import '../../../styles/colors.scss';
 
-.hidden {
-  display: none;
+// This is currently only supported in the Valo Development environment!
+
+.sample {
+  // This will include: "[theme:themePrimary, default: #0078d4]"
+  background-color: $ms-color-themePrimary;
 }

@@ -1,0 +1,24 @@
+{
+  "name": null,
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "sync": "gulp sync"
+  },
+  "devDependencies": {
+    "gulp": "4.0.2",
+    "gulp-concat": "2.6.1",
+    "gulp-sass": "4.1.0",
+    "gulp-spsync-creds": "2.3.8",
+    "gulp-typescript": "6.0.0-alpha.1",
+    "gulp-watch": "5.0.1",
+    "merge-stream": "2.0.0",
+    "node-sass": "4.14.1",
+    "typescript": "4.0.2",
+    "yargs": "15.4.1"
+  }
+}
