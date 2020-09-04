@@ -2,6 +2,8 @@
 
 This is the Yeoman - Valo Template Generator which allows you to make template creation a lot easier. The generator splits each template in multiple pieces (SASS, TypeScript, HTML, JSON) and merge them during the build process.
 
+![Overview of the build process](./assets/overview.png)
+
 ## Installation
 
 In order to get started, you will first have to install the following dependencies:

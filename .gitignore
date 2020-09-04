@@ -46,3 +46,4 @@ node_modules/
 dist/
 generatortest
 TODO.md
+.DS_Store
