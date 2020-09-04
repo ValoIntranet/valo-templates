@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Gets you started with valo templates",
   "main": "generators/app/index.js",
-  "author": "Elio Struyf",
+  "author": "Valo Intranet",
   "repository": {
     "type": "git",
     "url": "https://github.com/valointranet/valo-templates.git"
