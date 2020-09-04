@@ -6,7 +6,7 @@
   "author": "Elio Struyf",
   "repository": {
     "type": "git",
-    "url": "https://github.com/valointranet/valo-templates"
+    "url": "https://github.com/valointranet/valo-templates.git"
   },
   "scripts": {
     "build": "tsc",
@@ -26,9 +26,5 @@
     "@types/yeoman-generator": "4.11.2",
     "@types/yosay": "0.0.29",
     "typescript": "4.0.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/valointranet/valo-templates.git"
-  },
+  }
 }
